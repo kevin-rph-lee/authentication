@@ -1,0 +1,28 @@
+{
+  "name": "react-express-skeleton",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "client": "cd client && yarn start",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+  },
+  "author": "Lighthouse Labs",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.1.0",
+    "ejs": "^2.5.7",
+    "express": "^4.16.4",
+    "knex": "^0.15.2",
+    "knex-logger": "^0.1.0",
+    "morgan": "^1.9.0",
+    "node-sass-middleware": "^0.11.0",
+    "pg": "^7.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.2",
+    "concurrently": "^4.0.1"
+  }
+}
