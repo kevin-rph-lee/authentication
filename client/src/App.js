@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AppNavBar from './components/AppNavBar.js';
 import logo from './logo.svg';
+import axios from 'axios'
 import './App.css';
 import {HashRouter,
   Switch,
@@ -9,6 +10,22 @@ import {HashRouter,
 
 
 class App extends Component {
+
+
+  componentDidMount = () => {
+
+      axios.post('test/login', {
+
+      })
+      .then((response) => {
+        console.log('success?')
+      })
+      .catch((error) => {
+        console.log('error is ',error);
+      })
+  }
+
+
   render() {
     return (
       <div className="App">

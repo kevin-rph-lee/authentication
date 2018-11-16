@@ -26,6 +26,7 @@ class AppNavBar extends Component {
       <div>
         <Navbar color="light" light expand="md">
           <NavbarBrand href="/">React-Express-Skeleton</NavbarBrand>
+          <Button>Login!</Button>
         </Navbar>
       </div>
     );
