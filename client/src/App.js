@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import AppNavBar from './components/AppNavBar.js';
 import logo from './logo.svg';
-import axios from 'axios'
+import axios from 'axios';
 import './App.css';
+import decode from 'jwt-decode';
 import {HashRouter,
   Switch,
   Route,
@@ -10,19 +11,45 @@ import {HashRouter,
 
 
 class App extends Component {
+  constructor(props) {
 
+    super(props);
+
+    this.state = {
+      test: null
+    }
+    axios.post('test/login', {
+
+    })
+    .then((response) => {
+      this.setToken(response.data.token) // Setting the token in localStorage
+      const decoded = decode(response.data.token)
+      console.log(decoded)
+
+      return Promise.resolve(response);
+    })
+    .catch((error) => {
+      console.log('error is ',error);
+    })
+  }
 
   componentDidMount = () => {
 
-      axios.post('test/login', {
+  }
 
-      })
-      .then((response) => {
-        console.log('success?')
-      })
-      .catch((error) => {
-        console.log('error is ',error);
-      })
+  setToken(idToken) {
+      // Saves user token to localStorage
+      localStorage.setItem('id_token', idToken)
+  }
+
+  getToken() {
+      // Retrieves the user token from localStorage
+      return localStorage.getItem('id_token')
+  }
+
+  logout() {
+      // Clear user token and profile data from localStorage
+      localStorage.removeItem('id_token');
   }
 
 
