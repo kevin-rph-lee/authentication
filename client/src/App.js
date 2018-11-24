@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import AppNavBar from './components/AppNavBar.js';
-import logo from './logo.svg';
 import axios from 'axios';
 import './App.css';
 import decode from 'jwt-decode';
@@ -12,6 +11,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
 
+
+
+
+
 library.add(fab, faCheckSquare, faCoffee)
 
 class App extends Component {
@@ -20,21 +23,9 @@ class App extends Component {
     super(props);
 
     this.state = {
-      test: null
+
     }
-    axios.post('test/login', {
 
-    })
-    .then((response) => {
-      this.setToken(response.data.token) // Setting the token in localStorage
-      const decoded = decode(response.data.token)
-      console.log(decoded)
-
-      return Promise.resolve(response);
-    })
-    .catch((error) => {
-      console.log('error is ',error);
-    })
   }
 
   componentDidMount = () => {
