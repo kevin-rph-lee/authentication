@@ -5,11 +5,12 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter  } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
+import Navigation from './components/Navigation.js';
 
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <Navigation />
   </BrowserRouter>
     , document.getElementById('root'));
 
