@@ -1,46 +1,43 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import './App.css';
-import decode from 'jwt-decode';
-import {HashRouter,
-  Switch,
-  Route,
-  Link, BrowserRouter, Redirect, withRouter} from 'react-router-dom';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
-
-
-
-
-
-library.add(fab, faCheckSquare, faCoffee)
+import fire from './config/Fire.js';
+import Home from './components/Home.js';
+import Login from './components/Login.js';
 
 class App extends Component {
-  constructor(props) {
-
-    super(props);
-
-    this.state = {
-
-    }
-
+  constructor() {
+    super();
+    this.state = ({
+      user: null,
+    });
+    this.authListener = this.authListener.bind(this);
   }
 
-  componentDidMount = () => {
-
+  componentDidMount() {
+    this.authListener();
   }
 
+  authListener() {
+    fire.auth().onAuthStateChanged((user) => {
+      console.log(user);
+      if (user) {
+        this.setState({ user });
+        localStorage.setItem('user', user.uid);
+      } else {
+        this.setState({ user: null });
+        localStorage.removeItem('user');
+      }
+    });
+  }
 
   render() {
     return (
-      <div className="App">
-        <div className="main">
+     <div>
+       <p>Hello</p>
 
-        </div>
-      </div>
-    );
+     </div>
+    )
   }
 }
 
-export default App;
+ export default App;
