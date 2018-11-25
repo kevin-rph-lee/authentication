@@ -3,10 +3,7 @@ import './App.css';
 import fire from './config/Fire.js';
 import Home from './components/Home.js';
 import Login from './components/Login.js';
-import {HashRouter,
-  Switch,
-  Route,
-  Link, BrowserRouter, Redirect, withRouter} from 'react-router-dom';
+import {Switch, Route, withRouter} from 'react-router-dom';
 
 
 
@@ -29,10 +26,12 @@ class App extends Component {
         console.log('Yes')
         this.setState({ user });
         localStorage.setItem('user', user.uid);
+        this.props.history.push('/')
       } else {
         console.log('No')
         this.setState({ user: null });
         localStorage.removeItem('user');
+        this.props.history.push('/login')
       }
     });
   }
