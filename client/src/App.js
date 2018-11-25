@@ -36,7 +36,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <AppNavBar/>
         <div className="main">
 
         </div>

@@ -7,32 +7,22 @@ import { BrowserRouter, Route  } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 
 
-import Navigation from './components/Navigation.js';
-import LandingPage from './components/Landing.js';
-import SignUpPage from './components/SignUp.js';
-import SignInPage from './components/SignIn.js';
-import PasswordForgetPage from './components/PasswordForget.js';
-import HomePage from './components/Home.js';
-import AccountPage from './components/Account.js';
-import AdminPage from './components/Admin.js';
+// import Navigation from './components/Navigation.js';
+// import LandingPage from './components/Landing.js';
+// import SignUpPage from './components/SignUp.js';
+// import SignInPage from './components/SignIn.js';
+// import PasswordForgetPage from './components/PasswordForget.js';
+// import HomePage from './components/Home.js';
+// import AccountPage from './components/Account.js';
+// import AdminPage from './components/Admin.js';
 
-import * as ROUTES from './components/constants/routes';
+// import * as ROUTES from './components/constants/routes';
 
 
 ReactDOM.render(
   <BrowserRouter>
     <div>
-      <Navigation />
 
-      <hr />
-
-      <Route exact path={ROUTES.LANDING} component={LandingPage} />
-      <Route exact path={ROUTES.SIGN_UP} component={SignUpPage} />
-      <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
-      <Route exact path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
-      <Route exact path={ROUTES.HOME} component={HomePage} />
-      <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
-      <Route exact path={ROUTES.ADMIN} component={AdminPage} />
     </div>
   </BrowserRouter>
     , document.getElementById('root'));
