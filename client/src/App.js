@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AppNavBar from './components/AppNavBar.js';
 import axios from 'axios';
 import './App.css';
 import decode from 'jwt-decode';
