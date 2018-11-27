@@ -26,20 +26,34 @@ class Login extends Component {
       });
   }
 
+
+  signUp = (e) => {
+    e.preventDefault();
+    fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+    }).then((u)=>{console.log(u)})
+    .catch((error) => {
+        console.log(error);
+      })
+
+  }
+
   render() {
 
     return (
-      <Form>
-        <FormGroup>
-          <Label for="exampleEmail">Email</Label>
-          <Input value={this.state.email} onChange={this.handleChange} type="email" name="email" id="exampleEmail" aria-describedby="emailHelp" placeholder="Enter email" />
-        </FormGroup>
-        <FormGroup>
-          <Label for="examplePassword">Password</Label>
-          <Input type="password" name="password" id="examplePassword" placeholder="password placeholder" />
-        </FormGroup>
-        <Button onClick={this.login} >Login</Button>
-      </Form>
+      <div>
+        <Form>
+          <FormGroup>
+            <Label for="exampleEmail">Email</Label>
+            <Input value={this.state.email} onChange={this.handleChange} type="email" name="email" id="exampleEmail" aria-describedby="emailHelp" placeholder="Enter email" />
+          </FormGroup>
+          <FormGroup>
+            <Label for="examplePassword">Password</Label>
+            <Input type="password"  value={this.state.password} onChange={this.handleChange}  name="password" id="password" placeholder="password placeholder" />
+          </FormGroup>
+          <Button onClick={this.login} >Login</Button>
+        </Form>
+        <Button onClick={this.signUp} >Register</Button>
+      </div>
     )
   }
 }
