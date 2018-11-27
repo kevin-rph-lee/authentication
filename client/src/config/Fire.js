@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-console.log(process.env)
 const config = { /* COPY THE ACTUAL CONFIG FROM FIREBASE CONSOLE */
     apiKey: "AIzaSyAmUvke72UOX3tOV0hGyxxNR2amr8gt7oI",
     authDomain: "react-express-skeleton.firebaseapp.com",
