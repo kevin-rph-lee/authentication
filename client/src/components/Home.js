@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Button } from 'reactstrap';
+import fire from './../config/Fire';
 
 
 class Home extends Component {
@@ -8,6 +10,9 @@ class Home extends Component {
     this.componentDidMount = this.componentDidMount.bind(this);
   }
 
+  logout = () => {
+      fire.auth().signOut();
+  }
 
   componentDidMount = () => {
 
@@ -17,7 +22,7 @@ class Home extends Component {
 
     return (
       <div>
-      Home
+        <Button onClick={this.logout} >Logout</Button>
       </div>
     )
   }
