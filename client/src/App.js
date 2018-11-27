@@ -1,72 +1,49 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import fire from './config/Fire.js';
+import Home from './components/Home.js';
+import Login from './components/Login.js';
+import {Switch, Route, withRouter} from 'react-router-dom';
+
+
 
 class App extends Component {
-  state = {
-    response: '',
-    post: '',
-    responseToPost: '',
-  };
-  componentDidMount() {
-    this.callApi()
-      .then(res => this.setState({ response: res.express }))
-      .catch(err => console.log(err));
-  }
-  callApi = async () => {
-    const response = await fetch('/api/hello');
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  };
-  handleSubmit = async e => {
-    e.preventDefault();
-    const response = await fetch('/api/world', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ post: this.state.post }),
+  constructor() {
+    super();
+    this.state = ({
+      user: null,
     });
-    const body = await response.text();
-    this.setState({ responseToPost: body });
-  };
+    this.authListener = this.authListener.bind(this);
+  }
 
+  componentDidMount() {
+    this.authListener();
+  }
 
+  authListener() {
+    fire.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user });
+        localStorage.setItem('user', user.uid);
+        this.props.history.push('/')
+      } else {
+        this.setState({ user: null });
+        localStorage.removeItem('user');
+        this.props.history.push('/login')
+      }
+    });
+  }
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-        <p>{this.state.response}</p>
-        <form onSubmit={this.handleSubmit}>
-          <p>
-            <strong>Post to Server:</strong>
-          </p>
-          <input
-            type="text"
-            value={this.state.post}
-            onChange={e => this.setState({ post: e.target.value })}
-          />
-          <button type="submit">Submit</button>
-        </form>
-        <p>{this.state.responseToPost}</p>
+      <div>
+        <Switch>
+          <Route path='/login' render={(props) => <Login />} />
+          <Route path='/' render={(props) => <Home />} />
+        </Switch>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+ export default withRouter(App);

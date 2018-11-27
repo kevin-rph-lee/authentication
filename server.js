@@ -10,6 +10,11 @@ const sass        = require('node-sass-middleware');
 const app         = express();
 const bcrypt      = require('bcrypt');
 const cookieSession = require('cookie-session');
+const jwt = require('jsonwebtoken');
+const secret = process.env.SECRET
+const cookieParser = require('cookie-parser');
+
+
 
 const knexConfig  = require('./knexfile');
 const knex        = require('knex')(knexConfig[ENV]);
@@ -40,16 +45,35 @@ app.use(express.static('public'));
 // Mount all resource routes
 app.use('/users', usersRoutes(knex, bcrypt));
 
-app.get('/api/hello', (req, res) => {
-  res.send({ express: 'Hello From Express' });
-});
-app.post('/api/world', (req, res) => {
+
+
+app.get('/test/login', function(req, res) {
   console.log(req.body);
-  res.send(
-    `I received your POST request. This is what you sent me: ${req.body.post}`,
-  );
+  const token =
+    req.body.token ||
+    req.query.token ||
+    req.headers['x-access-token'] ||
+    req.cookies.token;
+
+  console.log(token);
+  res.sendStatus(200);
 });
 
+
+app.post('/test/login', function(req, res) {
+    const payload = {email: 'TEst'};
+
+    const token = jwt.sign(payload, secret, {
+      expiresIn: '1h'
+    });
+    console.log(token);
+    res.json({
+       user: 'Test user',
+       token: token
+    });
+});
+
+console.log(secret)
 // Home page
 app.get('/', (req, res) => {
   res.render('index');
