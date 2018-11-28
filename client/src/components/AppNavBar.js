@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import fire from './../config/Fire';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 import {
   Collapse,
@@ -46,7 +48,7 @@ class AppNavBar extends Component {
             <Nav className="ml-auto" navbar>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  Options
+                  <FontAwesomeIcon icon="cog" />
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>

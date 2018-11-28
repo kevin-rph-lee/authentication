@@ -6,6 +6,9 @@ import Login from './components/Login.js';
 import AppNavBar from './components/AppNavBar.js';
 import {Switch, Route, withRouter} from 'react-router-dom';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCog } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 class App extends Component {
@@ -18,6 +21,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    library.add(faCog)
     this.authListener();
   }
 
