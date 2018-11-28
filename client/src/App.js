@@ -3,6 +3,7 @@ import './App.css';
 import fire from './config/Fire.js';
 import Home from './components/Home.js';
 import Login from './components/Login.js';
+import AppNavBar from './components/AppNavBar.js';
 import {Switch, Route, withRouter} from 'react-router-dom';
 
 
@@ -37,6 +38,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <AppNavBar />
         <Switch>
           <Route path='/login' render={(props) => <Login />} />
           <Route path='/' render={(props) => <Home />} />
