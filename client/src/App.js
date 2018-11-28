@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import fire from './config/Fire.js';
 import Home from './components/Home.js';
-import Login from './components/Login.js';
+import Landing from './components/Landing.js';
 import AppNavBar from './components/AppNavBar.js';
 import {Switch, Route, withRouter} from 'react-router-dom';
 
@@ -34,7 +34,7 @@ class App extends Component {
       } else {
         this.setState({ user: null });
         localStorage.removeItem('user');
-        this.props.history.push('/login')
+        this.props.history.push('/Landing')
       }
     });
   }
@@ -44,8 +44,8 @@ class App extends Component {
       <div>
         <AppNavBar />
         <Switch>
-          <Route path='/login' render={(props) => <Login />} />
-          <Route path='/' render={(props) => <Home />} />
+          <Route path='/Home' render={(props) => <Home />} />
+          <Route path='/' render={(props) => <Landing />} />
         </Switch>
       </div>
     )
