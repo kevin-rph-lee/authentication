@@ -20,15 +20,19 @@ class AppNavBar extends Component {
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      dropDownIsOpen: false
     };
   }
-  toggle() {
+
+  toggleNavBarDropDown = () => {
     this.setState({
-      isOpen: !this.state.isOpen
+      dropDownIsOpen: !this.state.dropDownIsOpen
     });
+  }
+
+  logout = () => {
+      fire.auth().signOut();
   }
 
   render() {
@@ -36,16 +40,10 @@ class AppNavBar extends Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">reactstrap</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
+          <NavbarBrand href="/">React-Express skeleton</NavbarBrand>
+          <NavbarToggler onClick={this.toggleNavBarDropDown} />
+          <Collapse isOpen={this.state.dropDownIsOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/components/">Components</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-              </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   Options
@@ -58,8 +56,8 @@ class AppNavBar extends Component {
                     Option 2
                   </DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem>
-                    Reset
+                  <DropdownItem onClick={this.logout}>
+                    Logout
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
