@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 
 
-class Login extends Component {
+class Landing extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -57,4 +57,4 @@ class Login extends Component {
     )
   }
 }
-export default Login;
+export default Landing;

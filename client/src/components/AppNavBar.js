@@ -27,6 +27,11 @@ class AppNavBar extends Component {
     };
   }
 
+
+  // componentDidMount() {
+  //   console.log(this.state.user)
+  // }
+
   toggleNavBarDropDown = () => {
     this.setState({
       dropDownIsOpen: !this.state.dropDownIsOpen

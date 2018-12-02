@@ -12,8 +12,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 class App extends Component {
+
+
   constructor() {
     super();
+    library.add(faCog)
     this.state = ({
       user: null,
     });
@@ -21,7 +24,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    library.add(faCog)
     this.authListener();
   }
 
@@ -30,11 +32,11 @@ class App extends Component {
       if (user) {
         this.setState({ user });
         localStorage.setItem('user', user.uid);
-        this.props.history.push('/')
+        this.props.history.push('/Home')
       } else {
         this.setState({ user: null });
         localStorage.removeItem('user');
-        this.props.history.push('/Landing')
+        this.props.history.push('/')
       }
     });
   }
