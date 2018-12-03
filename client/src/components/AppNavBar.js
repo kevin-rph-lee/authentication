@@ -36,21 +36,30 @@ class AppNavBar extends Component {
 
     this.state = {
       dropDownIsOpen: false,
-      modalIsOpen: false
+      loginModalIsOpen: false,
+      registerModalIsOpen: false
 
     };
-    this.openModal = this.openModal.bind(this);
+    this.openLoginModal = this.openLoginModal.bind(this);
+    this.openRegisterModal = this.openRegisterModal.bind(this);
+
     this.closeModal = this.closeModal.bind(this);
 
   }
 
 
-  openModal() {
-    this.setState({modalIsOpen: true});
+  openLoginModal() {
+    this.setState({loginModalIsOpen: true});
   }
 
+  openRegisterModal() {
+    this.setState({registerModalIsOpen: true});
+  }
+
+
   closeModal() {
-    this.setState({modalIsOpen: false});
+    this.setState({loginModalIsOpen: false});
+    this.setState({registerModalIsOpen: false});
   }
 
 
@@ -80,17 +89,26 @@ class AppNavBar extends Component {
                       Option 2
                     </DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem onClick={this.openModal}>Open Modal</DropdownItem>
+                    <DropdownItem onClick={this.openLoginModal}>Login</DropdownItem>
                     <Modal
-                      isOpen={this.state.modalIsOpen}
-                      onAfterOpen={this.afterOpenModal}
+                      isOpen={this.state.loginModalIsOpen}
                       onRequestClose={this.closeModal}
                       style={customStyles}
-                      contentLabel="Example Modal"
                     >
                       <h1>Login</h1>
                       <button onClick={this.closeModal}>close</button>
                     </Modal>
+
+                    <DropdownItem onClick={this.openRegisterModal}>Register</DropdownItem>
+                    <Modal
+                      isOpen={this.state.registerModalIsOpen}
+                      onRequestClose={this.closeModal}
+                      style={customStyles}
+                    >
+                      <h1>Register</h1>
+                      <button onClick={this.closeModal}>close</button>
+                    </Modal>
+
                   </DropdownMenu>
                 </UncontrolledDropdown>
     } else {
