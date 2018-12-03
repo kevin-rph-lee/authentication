@@ -43,6 +43,45 @@ class AppNavBar extends Component {
   }
 
   render() {
+    let dropDownOptions = null;
+    if(!this.props.user){
+      dropDownOptions =
+                <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret>
+                    <FontAwesomeIcon icon="cog" />
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem>
+                      Option 1
+                    </DropdownItem>
+                    <DropdownItem>
+                      Option 2
+                    </DropdownItem>
+                    <DropdownItem divider />
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+    } else {
+      dropDownOptions =
+                <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret>
+                    <FontAwesomeIcon icon="cog" />
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem>
+                      Option 1
+                    </DropdownItem>
+                    <DropdownItem>
+                      Option 2
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem onClick={this.logout}>
+                      Logout
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+
+    }
+
 
     return (
       <div>
@@ -51,23 +90,7 @@ class AppNavBar extends Component {
           <NavbarToggler onClick={this.toggleNavBarDropDown} />
           <Collapse isOpen={this.state.dropDownIsOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  <FontAwesomeIcon icon="cog" />
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    Option 1
-                  </DropdownItem>
-                  <DropdownItem>
-                    Option 2
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem onClick={this.logout}>
-                    Logout
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+            {dropDownOptions}
             </Nav>
           </Collapse>
         </Navbar>

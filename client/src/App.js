@@ -44,7 +44,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <AppNavBar />
+        <AppNavBar user = {this.state.user} />
         <Switch>
           <Route path='/Home' render={(props) => <Home />} />
           <Route path='/' render={(props) => <Landing />} />
