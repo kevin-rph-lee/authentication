@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import fire from './../config/Fire';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Modal from 'react-modal';
@@ -37,7 +37,9 @@ class AppNavBar extends Component {
     this.state = {
       dropDownIsOpen: false,
       loginModalIsOpen: false,
-      registerModalIsOpen: false
+      registerModalIsOpen: false,
+      email: '',
+      password: ''
 
     };
     this.openLoginModal = this.openLoginModal.bind(this);
@@ -47,6 +49,42 @@ class AppNavBar extends Component {
 
   }
 
+  closeModal = () => {
+    this.setState({loginModalIsOpen: false});
+    this.setState({registerModalIsOpen: false});
+    this.setState({email: ''});
+    this.setState({password: ''});
+  }
+
+  login = (e) => {
+    e.preventDefault();
+    fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+      this.setState({loginModalIsOpen: false});
+      this.setState({registerModalIsOpen: false});
+      this.setState({email: ''});
+      this.setState({password: ''});
+    }).catch((error) => {
+        console.log(error);
+      });
+  }
+
+
+  signUp = (e) => {
+    e.preventDefault();
+    fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+      this.setState({loginModalIsOpen: false});
+      this.setState({registerModalIsOpen: false});
+      this.setState({email: ''});
+      this.setState({password: ''});
+    }).then((u)=>{console.log(u)})
+    .catch((error) => {
+        console.log(error);
+      })
+  }
+
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
 
   openLoginModal() {
     this.setState({loginModalIsOpen: true});
@@ -57,10 +95,7 @@ class AppNavBar extends Component {
   }
 
 
-  closeModal() {
-    this.setState({loginModalIsOpen: false});
-    this.setState({registerModalIsOpen: false});
-  }
+
 
 
   toggleNavBarDropDown = () => {
@@ -96,7 +131,18 @@ class AppNavBar extends Component {
                       style={customStyles}
                     >
                       <h1>Login</h1>
-                      <button onClick={this.closeModal}>close</button>
+                      <Form>
+                        <FormGroup>
+                          <Label for="exampleEmail">Email</Label>
+                          <Input value={this.state.email} onChange={this.handleChange} type="email" name="email" id="exampleEmail" aria-describedby="emailHelp" placeholder="Enter email" />
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="examplePassword">Password</Label>
+                          <Input type="password"  value={this.state.password} onChange={this.handleChange}  name="password" id="password" placeholder="password" />
+                        </FormGroup>
+                        <Button color="success" onClick={this.login} >Login</Button>
+                      </Form>
+                      <Button onClick={this.closeModal}>close</Button>
                     </Modal>
 
                     <DropdownItem onClick={this.openRegisterModal}>Register</DropdownItem>
@@ -106,7 +152,18 @@ class AppNavBar extends Component {
                       style={customStyles}
                     >
                       <h1>Register</h1>
-                      <button onClick={this.closeModal}>close</button>
+                      <Form>
+                        <FormGroup>
+                          <Label for="exampleEmail">Email</Label>
+                          <Input value={this.state.email} onChange={this.handleChange} type="email" name="email" id="exampleEmail" aria-describedby="emailHelp" placeholder="Enter email" />
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="examplePassword">Password</Label>
+                          <Input type="password"  value={this.state.password} onChange={this.handleChange}  name="password" id="password" placeholder="password" />
+                        </FormGroup>
+                        <Button color="success" onClick={this.signUp} >Register</Button>
+                      </Form>
+                      <Button onClick={this.closeModal}>close</Button>
                     </Modal>
 
                   </DropdownMenu>
