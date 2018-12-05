@@ -22,7 +22,7 @@ class Home extends Component {
 
     return (
       <div>
-        <Button onClick={this.logout} >Logout</Button>
+        <h1>Home Page, you are now logged in</h1>
       </div>
     )
   }
