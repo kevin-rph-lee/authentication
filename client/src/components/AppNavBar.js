@@ -3,6 +3,16 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import fire from './../config/Fire';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Modal from 'react-modal';
+import Alert from 'react-s-alert';
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/slide.css';
+import 'react-s-alert/dist/s-alert-css-effects/scale.css';
+import 'react-s-alert/dist/s-alert-css-effects/bouncyflip.css';
+import 'react-s-alert/dist/s-alert-css-effects/flip.css';
+import 'react-s-alert/dist/s-alert-css-effects/genie.css';
+import 'react-s-alert/dist/s-alert-css-effects/jelly.css';
+import 'react-s-alert/dist/s-alert-css-effects/stackslide.css';
 
 
 import {
@@ -44,10 +54,20 @@ class AppNavBar extends Component {
     };
     this.openLoginModal = this.openLoginModal.bind(this);
     this.openRegisterModal = this.openRegisterModal.bind(this);
-
     this.closeModal = this.closeModal.bind(this);
 
   }
+
+
+  errorPopUp = (message) => {
+      // e.preventDefault();
+      Alert.info(message, {
+          position: 'top-right',
+          effect: 'bouncyflip',
+          offset: 100
+      });
+  }
+
 
   closeModal = () => {
     this.setState({loginModalIsOpen: false});
@@ -64,7 +84,7 @@ class AppNavBar extends Component {
       this.setState({email: ''});
       this.setState({password: ''});
     }).catch((error) => {
-        console.log(error);
+        this.errorPopUp(error.message);
       });
   }
 
@@ -78,7 +98,7 @@ class AppNavBar extends Component {
       this.setState({password: ''});
     }).then((u)=>{console.log(u)})
     .catch((error) => {
-        console.log(error);
+        this.errorPopUp(error.message);
       })
   }
 
@@ -202,7 +222,7 @@ class AppNavBar extends Component {
             </Nav>
           </Collapse>
         </Navbar>
-
+        <Alert timeout={5000} stack={{limit: 1}} />
       </div>
     )
   }

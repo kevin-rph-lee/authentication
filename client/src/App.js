@@ -9,7 +9,7 @@ import {Switch, Route, withRouter} from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import Alert from 'react-s-alert';
 
 class App extends Component {
 
@@ -23,9 +23,22 @@ class App extends Component {
     this.authListener = this.authListener.bind(this);
   }
 
+
+
+
   componentDidMount() {
     this.authListener();
   }
+
+    handleClick2 =(e) => {
+        e.preventDefault();
+        Alert.info('Test message 2', {
+            position: 'top-right',
+            effect: 'bouncyflip',
+            timeout: 50
+        });
+    }
+
 
   authListener() {
     fire.auth().onAuthStateChanged((user) => {
