@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import fire from './../config/Fire';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 
 
