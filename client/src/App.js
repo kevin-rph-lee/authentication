@@ -20,27 +20,24 @@ class App extends Component {
     this.state = ({
       user: null,
     });
-    this.authListener = this.authListener.bind(this);
+    // this.authListener = this.authListener.bind(this);
   }
-
-
-
 
   componentDidMount() {
-    this.authListener();
+    // this.authListener();
   }
 
-    handleClick2 =(e) => {
-        e.preventDefault();
-        Alert.info('Test message 2', {
-            position: 'top-right',
-            effect: 'bouncyflip',
-            timeout: 50
-        });
-    }
+    // handleClick2 =(e) => {
+    //     e.preventDefault();
+    //     Alert.info('Test message 2', {
+    //         position: 'top-right',
+    //         effect: 'bouncyflip',
+    //         timeout: 50
+    //     });
+    // }
 
 
-  authListener() {
+  // authListener() {
     // fire.auth().onAuthStateChanged((user) => {
     //   if (user) {
     //     this.setState({ user });
@@ -52,7 +49,7 @@ class App extends Component {
     //     this.props.history.push('/')
     //   }
     // });
-  }
+  // }
 
   render() {
     return (

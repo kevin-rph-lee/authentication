@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import fire from './../config/Fire';
+// import fire from './../config/Fire';
 
 
 class Home extends Component {
@@ -7,10 +7,6 @@ class Home extends Component {
     super(props);
 
     this.componentDidMount = this.componentDidMount.bind(this);
-  }
-
-  logout = () => {
-      fire.auth().signOut();
   }
 
   componentDidMount = () => {

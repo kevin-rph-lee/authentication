@@ -14,7 +14,7 @@ class Landing extends Component {
 
     return (
       <div>
-      <h1>You are not logged in, please login</h1>
+        <h1>You are not logged in, please login</h1>
       </div>
     )
   }
