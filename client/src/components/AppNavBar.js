@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import fire from './../config/Fire';
+// import fire from './../config/Fire';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Modal from 'react-modal';
 import Alert from 'react-s-alert';
@@ -71,28 +71,28 @@ class AppNavBar extends Component {
 
   login = (e) => {
     e.preventDefault();
-    fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
-      this.setState({loginModalIsOpen: false});
-      this.setState({registerModalIsOpen: false});
-      this.setState({email: ''});
-      this.setState({password: ''});
-    }).catch((error) => {
-        this.errorPopUp(error.message);
-      });
+    // fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+    //   this.setState({loginModalIsOpen: false});
+    //   this.setState({registerModalIsOpen: false});
+    //   this.setState({email: ''});
+    //   this.setState({password: ''});
+    // }).catch((error) => {
+    //     this.errorPopUp(error.message);
+    //   });
   }
 
 
   signUp = (e) => {
     e.preventDefault();
-    fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
-      this.setState({loginModalIsOpen: false});
-      this.setState({registerModalIsOpen: false});
-      this.setState({email: ''});
-      this.setState({password: ''});
-    }).then((u)=>{console.log(u)})
-    .catch((error) => {
-        this.errorPopUp(error.message);
-      })
+    // fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+    //   this.setState({loginModalIsOpen: false});
+    //   this.setState({registerModalIsOpen: false});
+    //   this.setState({email: ''});
+    //   this.setState({password: ''});
+    // }).then((u)=>{console.log(u)})
+    // .catch((error) => {
+    //     this.errorPopUp(error.message);
+    //   })
   }
 
   handleChange = (e) => {
@@ -107,10 +107,6 @@ class AppNavBar extends Component {
     this.setState({registerModalIsOpen: true});
   }
 
-
-
-
-
   toggleNavBarDropDown = () => {
     this.setState({
       dropDownIsOpen: !this.state.dropDownIsOpen
@@ -118,7 +114,7 @@ class AppNavBar extends Component {
   }
 
   logout = () => {
-      fire.auth().signOut();
+      // fire.auth().signOut();
   }
 
   render() {

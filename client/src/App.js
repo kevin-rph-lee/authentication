@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import fire from './config/Fire.js';
+// import fire from './config/Fire.js';
 import Home from './components/Home.js';
 import Landing from './components/Landing.js';
 import AppNavBar from './components/AppNavBar.js';
@@ -41,17 +41,17 @@ class App extends Component {
 
 
   authListener() {
-    fire.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ user });
-        localStorage.setItem('user', user.uid);
-        this.props.history.push('/Home')
-      } else {
-        this.setState({ user: null });
-        localStorage.removeItem('user');
-        this.props.history.push('/')
-      }
-    });
+    // fire.auth().onAuthStateChanged((user) => {
+    //   if (user) {
+    //     this.setState({ user });
+    //     localStorage.setItem('user', user.uid);
+    //     this.props.history.push('/Home')
+    //   } else {
+    //     this.setState({ user: null });
+    //     localStorage.removeItem('user');
+    //     this.props.history.push('/')
+    //   }
+    // });
   }
 
   render() {

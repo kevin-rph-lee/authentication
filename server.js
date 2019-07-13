@@ -47,31 +47,31 @@ app.use('/users', usersRoutes(knex, bcrypt));
 
 
 
-app.get('/test/login', function(req, res) {
-  console.log(req.body);
-  const token =
-    req.body.token ||
-    req.query.token ||
-    req.headers['x-access-token'] ||
-    req.cookies.token;
+// app.get('/test/login', function(req, res) {
+//   console.log(req.body);
+//   const token =
+//     req.body.token ||
+//     req.query.token ||
+//     req.headers['x-access-token'] ||
+//     req.cookies.token;
 
-  console.log(token);
-  res.sendStatus(200);
-});
+//   console.log(token);
+//   res.sendStatus(200);
+// });
 
 
-app.post('/test/login', function(req, res) {
-    const payload = {email: 'TEst'};
+// app.post('/test/login', function(req, res) {
+//     const payload = {email: 'TEst'};
 
-    const token = jwt.sign(payload, secret, {
-      expiresIn: '1h'
-    });
-    console.log(token);
-    res.json({
-       user: 'Test user',
-       token: token
-    });
-});
+//     const token = jwt.sign(payload, secret, {
+//       expiresIn: '1h'
+//     });
+//     console.log(token);
+//     res.json({
+//        user: 'Test user',
+//        token: token
+//     });
+// });
 
 console.log(secret)
 // Home page
