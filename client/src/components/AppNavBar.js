@@ -99,11 +99,11 @@ class AppNavBar extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  openLoginModal() {
+  openLoginModal = () => {
     this.setState({loginModalIsOpen: true});
   }
 
-  openRegisterModal() {
+  openRegisterModal = () => {
     this.setState({registerModalIsOpen: true});
   }
 
