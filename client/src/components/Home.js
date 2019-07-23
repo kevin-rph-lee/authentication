@@ -13,9 +13,11 @@ class Home extends Component {
 
   componentDidMount = () => {
 
+    //Need to do authorization here to kick user back to landing
+
   }
 
-  //Sends an axios request to the DB server
+  //Sends an axios request to the DB server as a test
   dbTest = () => {
     axios.get('/users/')
       .then(function (response) {

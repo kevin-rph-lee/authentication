@@ -20,36 +20,11 @@ class App extends Component {
     this.state = ({
       user: null,
     });
-    // this.authListener = this.authListener.bind(this);
   }
 
   componentDidMount() {
-    // this.authListener();
+
   }
-
-    // handleClick2 =(e) => {
-    //     e.preventDefault();
-    //     Alert.info('Test message 2', {
-    //         position: 'top-right',
-    //         effect: 'bouncyflip',
-    //         timeout: 50
-    //     });
-    // }
-
-
-  // authListener() {
-    // fire.auth().onAuthStateChanged((user) => {
-    //   if (user) {
-    //     this.setState({ user });
-    //     localStorage.setItem('user', user.uid);
-    //     this.props.history.push('/Home')
-    //   } else {
-    //     this.setState({ user: null });
-    //     localStorage.removeItem('user');
-    //     this.props.history.push('/')
-    //   }
-    // });
-  // }
 
   render() {
     return (
