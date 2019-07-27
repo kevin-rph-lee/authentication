@@ -3,7 +3,7 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (knex, bcrypt) => {
+module.exports = (knex, bcrypt, jwt, SECRET) => {
 
   //Login route
   router.post('/login', (req, res) => {
@@ -15,7 +15,18 @@ module.exports = (knex, bcrypt) => {
         if(req.body.password === undefined || results.length === 0 || req.body.password.length === 0){
           return res.sendStatus(404);
         } else if (bcrypt.compareSync(req.body.password, results[0].password)) {
-          return res.sendStatus(200);
+
+          let token = jwt.sign({email:req.body.email},
+            SECRET,
+            { expiresIn: '24h' // expires in 24 hours
+            }
+          );
+          return res.json({
+            success: true,
+            message: 'Authentication successful!',
+            token: token
+          });
+
         } else {
           return res.sendStatus(403);
         }

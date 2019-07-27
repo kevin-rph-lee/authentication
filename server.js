@@ -74,7 +74,7 @@ let checkToken = (req, res, next) => {
 };
 
 // Mount all resource routes
-app.use('/users', usersRoutes(knex, bcrypt));
+app.use('/users', usersRoutes(knex, bcrypt, jwt, SECRET));
 
 //Create JWT example
 app.get('/jwt', (req, res) => {
