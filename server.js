@@ -4,6 +4,7 @@ require('dotenv').config();
 
 const PORT        = process.env.PORT || 8080;
 const ENV         = process.env.ENV || 'development';
+const SECRET      = process.env.SECRET
 const express     = require('express');
 const bodyParser  = require('body-parser');
 const sass        = require('node-sass-middleware');
@@ -11,9 +12,8 @@ const app         = express();
 const bcrypt      = require('bcrypt');
 const cookieSession = require('cookie-session');
 const jwt = require('jsonwebtoken');
-const secret = process.env.SECRET
 const cookieParser = require('cookie-parser');
-
+const fs = require('fs')
 
 
 const knexConfig  = require('./knexfile');
@@ -42,40 +42,64 @@ app.use('/styles', sass({
   debug: true,
   outputStyle: 'expanded'
 }));
+
 app.use(express.static('public'));
+
+//Middle ware that checks tokens
+let checkToken = (req, res, next) => {
+  let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
+  if (token.startsWith('Bearer ')) {
+    // Remove Bearer from string
+    token = token.slice(7, token.length);
+  }
+
+  if (token) {
+    jwt.verify(token, SECRET, (err, decoded) => {
+      if (err) {
+        return res.json({
+          success: false,
+          message: 'Token is not valid'
+        });
+      } else {
+        req.decoded = decoded;
+        next();
+      }
+    });
+  } else {
+    return res.json({
+      success: false,
+      message: 'Auth token is not supplied'
+    });
+  }
+};
 
 // Mount all resource routes
 app.use('/users', usersRoutes(knex, bcrypt));
 
+//Create JWT example
+app.get('/jwt', (req, res) => {
+    // let privateKey = fs.readFileSync('./private.pem', 'utf8');
+    // let token = jwt.sign({ "body": "stuff" }, "MySuperSecretPassPhrase", { algorithm: 'HS256'});
+    // res.send(token);
+    let token = jwt.sign({username: 'Test'},
+      SECRET,
+      { expiresIn: '24h' // expires in 24 hours
+      }
+    );
+    res.json({
+      success: true,
+      message: 'Authentication successful!',
+      token: token
+    });
 
 
-// app.get('/test/login', function(req, res) {
-//   console.log(req.body);
-//   const token =
-//     req.body.token ||
-//     req.query.token ||
-//     req.headers['x-access-token'] ||
-//     req.cookies.token;
+})
 
-//   console.log(token);
-//   res.sendStatus(200);
-// });
+//Token check example
+app.get('/secret', checkToken, (req, res) => {
+    res.json({ "message" : "THIS IS SUPER SECRET, DO NOT SHARE!" })
+})
 
-
-// app.post('/test/login', function(req, res) {
-//     const payload = {email: 'TEst'};
-
-//     const token = jwt.sign(payload, secret, {
-//       expiresIn: '1h'
-//     });
-//     console.log(token);
-//     res.json({
-//        user: 'Test user',
-//        token: token
-//     });
-// });
-
-console.log(secret)
 // Home page
 app.get('/', (req, res) => {
   res.render('index');
