@@ -77,7 +77,7 @@ class AppNavBar extends Component {
       password: this.state.password
     })
     .then((response) => {
-      console.log(response.data);
+      localStorage.setItem('email', JSON.stringify(response.data.token));
     })
     .catch((error) => {
       this.errorPopUp(error.message);
