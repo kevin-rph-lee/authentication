@@ -85,7 +85,7 @@ class AppNavBar extends Component {
     .then((response) => {
       localStorage.setItem('token', JSON.stringify(response.data.token));
       this.props.updateToken(JSON.stringify(response.data.token));
-      this.props.history.push("/app")
+      this.props.history.push('/app')
     })
     .catch((error) => {
       this.errorPopUp(error.message);

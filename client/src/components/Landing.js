@@ -14,10 +14,9 @@ class Landing extends Component {
   }
 
   componentDidMount = () => {
-
     //Need to do authorization here to kick user back to landing
-    if(typeof localStorage.getItem('email') === 'string'){
-      console.log('True')
+    if(typeof localStorage.getItem('token') === 'string'){
+      this.props.history.push('/app')
     } else {
       console.log('false')
     }
@@ -33,4 +32,4 @@ class Landing extends Component {
     )
   }
 }
-export default Landing;
+export default withRouter(Landing);
