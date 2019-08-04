@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-
+import {HashRouter,
+  Switch,
+  Route,
+  Link, BrowserRouter, browserHistory, Redirect, withRouter  } from 'react-router-dom';
 
 
 class Landing extends Component {
@@ -9,6 +12,17 @@ class Landing extends Component {
 
     };
   }
+
+  componentDidMount = () => {
+
+    //Need to do authorization here to kick user back to landing
+    if(typeof localStorage.getItem('email') === 'string'){
+      console.log('True')
+    } else {
+      console.log('false')
+    }
+  }
+
 
   render() {
 

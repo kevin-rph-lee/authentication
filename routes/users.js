@@ -3,6 +3,29 @@
 const express = require('express');
 const router  = express.Router();
 
+
+//Middle ware that checks tokens
+let checkToken = (req, res, next) => {
+  let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
+  if (token.startsWith('Bearer ')) {
+    // Remove Bearer from string
+    token = token.slice(7, token.length);
+  }
+
+  if (token) {
+    jwt.verify(token, SECRET, (err, decoded) => {
+      if (err) {
+        return true
+      } else {
+        req.decoded = decoded;
+        next();
+      }
+    });
+  } else {
+    return false
+  }
+};
+
 module.exports = (knex, bcrypt, jwt, SECRET) => {
 
   //Login route
@@ -32,6 +55,16 @@ module.exports = (knex, bcrypt, jwt, SECRET) => {
         }
       });
   });
+
+  //Token check example
+  router.get('/authentication', checkToken, (req, res) => {
+      if(checkToken){
+        return true
+      } else {
+        return false
+      }
+  })
+
 
   //Test route that grabs users
   router.get('/', (req, res) => {
