@@ -77,7 +77,7 @@ class AppNavBar extends Component {
       password: this.state.password
     })
     .then((response) => {
-      localStorage.setItem('email', JSON.stringify(response.data.token));
+      localStorage.setItem('token', JSON.stringify(response.data.token));
     })
     .catch((error) => {
       this.errorPopUp(error.message);
@@ -110,17 +110,13 @@ class AppNavBar extends Component {
   }
 
   logout = () => {
-
+    localStorage.removeItem('token')
   }
 
   render() {
-    return (
-      <div>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">React-Express skeleton</NavbarBrand>
-          <NavbarToggler onClick={this.toggleNavBarDropDown} />
-          <Collapse isOpen={this.state.dropDownIsOpen} navbar>
-            <Nav className="ml-auto" navbar>
+  let dropDownOptions = null;
+    if(typeof localStorage.getItem('token') !== 'string'){
+      dropDownOptions =
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret>
                     <FontAwesomeIcon icon="cog" />
@@ -146,7 +142,7 @@ class AppNavBar extends Component {
                           <Input value={this.state.email} onChange={this.handleChange} type="email" name="email" id="exampleEmail" aria-describedby="emailHelp" placeholder="Enter email" />
                         </FormGroup>
                         <FormGroup>
-                          <Label>Password</Label>
+                          <Label for="examplePassword">Password</Label>
                           <Input type="password"  value={this.state.password} onChange={this.handleChange}  name="password" id="password" placeholder="password" />
                         </FormGroup>
                         <Button color="success" onClick={this.login} >Login</Button>
@@ -163,7 +159,7 @@ class AppNavBar extends Component {
                       <h1>Register</h1>
                       <Form>
                         <FormGroup>
-                          <Label>Email</Label>
+                          <Label for="exampleEmail">Email</Label>
                           <Input value={this.state.email} onChange={this.handleChange} type="email" name="email" id="exampleEmail" aria-describedby="emailHelp" placeholder="Enter email" />
                         </FormGroup>
                         <FormGroup>
@@ -177,12 +173,44 @@ class AppNavBar extends Component {
 
                   </DropdownMenu>
                 </UncontrolledDropdown>
+    } else {
+      dropDownOptions =
+                <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret>
+                    <FontAwesomeIcon icon="cog" />
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem>
+                      Option 1
+                    </DropdownItem>
+                    <DropdownItem>
+                      Option 2
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem onClick={this.logout}>
+                      Logout
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+
+    }
+
+
+    return (
+      <div>
+        <Navbar color="light" light expand="md">
+          <NavbarBrand href="/">React-Express skeleton</NavbarBrand>
+          <NavbarToggler onClick={this.toggleNavBarDropDown} />
+          <Collapse isOpen={this.state.dropDownIsOpen} navbar>
+            <Nav className="ml-auto" navbar>
+            {dropDownOptions}
             </Nav>
           </Collapse>
         </Navbar>
         <Alert timeout={5000} stack={{limit: 1}} />
       </div>
     )
+
   }
 }
 export default AppNavBar;

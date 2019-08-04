@@ -48,12 +48,7 @@ class App extends Component {
 
   componentDidMount() {
     console.log(typeof localStorage.getItem('email'))
-    console.log('Local ', localStorage.getItem('email'));
-    if(typeof localStorage.getItem('email') === 'string'){
-      console.log('True')
-    } else {
-      console.log('false')
-    }
+    console.log('Local ', localStorage.getItem('token'));
   }
 
   // isAuthenticated = () => {
@@ -73,10 +68,14 @@ class App extends Component {
   render() {
 
     return (
-      <Switch>
-        <Route exact path="/" component={Landing} />
-        <Route path="*" component={() => "404 NOT FOUND"} />
-      </Switch>
+      <div>
+        <AppNavBar />
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <ProtectedRoute exact path="/app" component={Home} />
+          <Route path="*" component={() => "404 NOT FOUND"} />
+        </Switch>
+      </div>
     )
   }
 }

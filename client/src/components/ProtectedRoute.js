@@ -9,7 +9,7 @@ export const ProtectedRoute = ({
     <Route
       {...rest}
       render={props => {
-        if (typeof localStorage.getItem('email') === 'string') {
+        if (typeof localStorage.getItem('token') === 'string') {
           return <Component {...props} />;
         } else {
           return (
