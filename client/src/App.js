@@ -11,7 +11,7 @@ import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Alert from 'react-s-alert';
 import { ProtectedRoute } from './components/ProtectedRoute.js';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import {Link, BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
 
 
 // import React from 'react'
@@ -42,37 +42,29 @@ class App extends Component {
     super();
     library.add(faCog)
     this.state = ({
-      user: null,
+      token: null,
     });
   }
 
   componentDidMount() {
-    console.log(typeof localStorage.getItem('email'))
-    console.log('Local ', localStorage.getItem('token'));
+
   }
 
-  // isAuthenticated = () => {
-  //   axios.post('users/authenication', {
-  //     authorization: localStorage.getItem('email')
-  //   })
-  //   .then((response) => {
-  //     console.log('gewd ',response)
-  //   })
-  //   .catch((error) => {
-  //     console.log('baad ',response)
-  //   });
-  // }
-
+  updateToken = (token) => {
+    this.setState({
+      token: token
+    });
+  }
 
 
   render() {
 
     return (
       <div>
-        <AppNavBar />
+        <AppNavBar updateToken = {this.updateToken}/>
         <Switch>
           <Route exact path="/" component={Landing} />
-          <ProtectedRoute exact path="/app" component={Home} />
+          <ProtectedRoute token = {this.state.token} exact path="/app" component={Home} />
           <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>
       </div>
@@ -80,4 +72,4 @@ class App extends Component {
   }
 }
 
- export default App
+ export default withRouter(App)

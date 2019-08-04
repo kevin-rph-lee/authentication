@@ -7,6 +7,12 @@ import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/bouncyflip.css';
 import axios from 'axios';
+import {HashRouter,
+  Switch,
+  Route,
+  Link, BrowserRouter, browserHistory, Redirect, withRouter } from 'react-router-dom';
+
+
 
 import {
   Collapse,
@@ -78,6 +84,8 @@ class AppNavBar extends Component {
     })
     .then((response) => {
       localStorage.setItem('token', JSON.stringify(response.data.token));
+      this.props.updateToken(JSON.stringify(response.data.token));
+      this.props.history.push("/app")
     })
     .catch((error) => {
       this.errorPopUp(error.message);
@@ -111,6 +119,7 @@ class AppNavBar extends Component {
 
   logout = () => {
     localStorage.removeItem('token')
+    this.props.updateToken(null);
   }
 
   render() {
@@ -213,4 +222,4 @@ class AppNavBar extends Component {
 
   }
 }
-export default AppNavBar;
+export default withRouter(AppNavBar);
